@@ -1,0 +1,11 @@
+*.zip
+*.log
+*.tmp
+*.cache
+Thumbs.db
+.DS_Store
+node_modules/
+dist/
+build/
+coverage/
+*.bak

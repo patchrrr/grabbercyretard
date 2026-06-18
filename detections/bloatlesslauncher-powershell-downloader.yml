@@ -1,0 +1,37 @@
+title: Suspicious PowerShell Downloader Writing To System32
+id: 0d3c8aa5-2f4d-4f7e-99e0-6b0f6f0f6d01
+status: experimental
+description: Detects PowerShell download-and-drop behavior consistent with the observed grabber.cy sample.
+references:
+  - https://attack.mitre.org/techniques/T1059/001/
+  - https://attack.mitre.org/techniques/T1105/
+tags:
+  - attack.command-and-control
+  - attack.t1059.001
+  - attack.t1105
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_img:
+    Image|endswith:
+      - '\\powershell.exe'
+      - '\\pwsh.exe'
+      - '\\powershell_ise.exe'
+  selection_cmd:
+    CommandLine|contains|all:
+      - 'Invoke-WebRequest'
+      - 'legendary.exe'
+  selection_path:
+    CommandLine|contains:
+      - 'C:\\Windows\\System32\\'
+      - '%SystemRoot%\\System32\\'
+  selection_alias:
+    CommandLine|contains:
+      - ' iwr '
+      - ' curl '
+      - ' wget '
+  condition: selection_img and selection_path and (selection_cmd or selection_alias)
+falsepositives:
+  - Administrative scripting that stages signed tools into system directories
+level: high

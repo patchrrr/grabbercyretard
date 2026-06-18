@@ -1,0 +1,150 @@
+{
+  "sample": {
+    "target": "BloatlessLauncher.exe",
+    "sample_id": "260618-tkb2eabs91",
+    "score": 8,
+    "platform": "windows11-ltsc_2024_x64",
+    "submitted_utc": "2026-06-18T16:06:00Z"
+  },
+  "artifacts": {
+    "files": [
+      {
+        "path": "C:\\Users\\Admin\\AppData\\Local\\Temp\\BloatlessLauncher.exe",
+        "role": "main sample"
+      },
+      {
+        "path": "C:\\Users\\Admin\\AppData\\Local\\Temp\\original_335150.exe",
+        "role": "dropped executable"
+      },
+      {
+        "path": "C:\\Users\\Admin\\AppData\\Local\\Temp\\E039.tmp\\E03A.tmp\\E03B.bat",
+        "role": "temporary batch launcher"
+      },
+      {
+        "path": "C:\\Windows\\System32\\legendary.exe",
+        "role": "downloaded payload"
+      }
+    ],
+    "hashes": [
+      {
+        "name": "BloatlessLauncher.exe",
+        "sha256": "44744c2dada4e757d2d66115d2ab036e6d4525866709cf407d7549a326088fa2",
+        "md5": "ebcd2f99c84f8bd59485cdae93d2e746",
+        "sha1": "3f7683d4cd0b860a96b1aaabab12c6e2aecc522d",
+        "sha512": "84e3511d5c630fd84faf52091ea4ffbc367dca26faefe44ee6e5ebc9b4ad26e3cd5d345585e1dfcfde8e875ce1bf8d3253e25910e17cd5d8678583c4bf0fc3a3",
+        "ssdeep": "49152:cZqcf+bzMUhfXTJlUqVuJqx/FGdfUfWTJ0ZqQGDSp6jr0S45S2Tw:DNfXTL46zncR",
+        "tlsh": "T1B9F59E1AB2B501FCC0A7C1798A575D13EA72740A03769BEF17E089662F23AE05F7E711"
+      },
+      {
+        "name": "original_335150.exe",
+        "sha256": "b366a727970fc13e9cab010131c8337a4c800bde623b5a301f00ee44cff16b8b",
+        "md5": "64f64ed9d38b23d7e2f6d64ec03b3004",
+        "sha1": "839da4cf428d8ed66677aaf76c21c8309c138dd0",
+        "sha512": "1be737ad1003d6062c5159ac1887c419b794a72e3b7981fd281f68f93d85103e82d5d4586fe8fdfce7d6d5b611fc833a8c32375fe2a3fa71822a209605d08a0c",
+        "ssdeep": "1536:37fbN3eEDhDPA/pICdUkbBtW7upvaLU0bI5taxKo0IOlnToIfmw9COS:r7DhdC6kzWypvaQ0FxyNTBfm88",
+        "tlsh": "T1A6937D41F2E202F7EAF1053100A6716F9B3663389764A8EBC74C2D529913AD5A63D3F9"
+      },
+      {
+        "name": "E03B.bat",
+        "sha256": "ef674c712af88705f91515dc567357c7c2c6267e1e2ee2435e7b509b3ddb562d",
+        "md5": "e8706fb3203869718aafd1ab09e68c43",
+        "sha1": "7c0c7ae6c2a68f501c4b3e7ff69baa77d83ec82c",
+        "sha512": "1a71fff3cd00819689e93f329a93ba3d7b203f8d2a6bf594fa024d4cbdb441fb2197b84b2e73a78976987fdc2ede22ff13b5448b3f2c25cb46c9218abdf257c8"
+      }
+    ]
+  },
+  "observables": {
+    "domains": [
+      "anondrop.net",
+      "doxbin.com",
+      "doxbin.net",
+      "ethereum.publicnode.com",
+      "github.com",
+      "release-assets.githubusercontent.com",
+      "servus.doxbin.cy",
+      "uncoverit.org"
+    ],
+    "ip_addresses": [
+      "8.8.8.8",
+      "20.26.156.215",
+      "104.20.24.117",
+      "104.20.34.162",
+      "104.21.36.198",
+      "104.21.55.221",
+      "104.21.93.111",
+      "104.26.4.226",
+      "104.26.5.226",
+      "140.82.112.3",
+      "140.82.112.4",
+      "140.82.121.3",
+      "140.82.121.4",
+      "150.171.109.73",
+      "150.171.109.150",
+      "150.171.110.6",
+      "150.171.110.147",
+      "150.171.110.177",
+      "150.171.110.209",
+      "162.159.36.2",
+      "172.66.150.162",
+      "172.66.150.166",
+      "172.67.73.226",
+      "172.67.173.197",
+      "172.67.199.19",
+      "185.199.108.133",
+      "185.199.109.133",
+      "185.199.110.133",
+      "185.199.111.133",
+      "216.150.1.1"
+    ],
+    "http_requests": [
+      {
+        "method": "GET",
+        "url": "https://github.com/derrod/legendary/releases/download/0.20.34/legendary.exe",
+        "status": 301,
+        "note": "redirected to the canonical legendary-gl repository"
+      },
+      {
+        "method": "GET",
+        "url": "https://github.com/legendary-gl/legendary/releases/download/0.20.34/legendary.exe",
+        "status": 302,
+        "note": "redirected to release-assets.githubusercontent.com"
+      },
+      {
+        "method": "GET",
+        "url": "https://release-assets.githubusercontent.com/github-production-release-asset/249938026/legendary.exe",
+        "status": 200,
+        "note": "final payload delivery"
+      },
+      {
+        "method": "POST",
+        "url": "https://anondrop.net/85433?action=init",
+        "status": 405,
+        "note": "blocked or unsupported request"
+      },
+      {
+        "method": "POST",
+        "url": "https://doxbin.com/18783?action=init",
+        "status": 403,
+        "note": "challenge or block response"
+      },
+      {
+        "method": "POST",
+        "url": "https://ethereum.publicnode.com/",
+        "status": 200,
+        "note": "JSON response observed"
+      }
+    ]
+  },
+  "techniques": [
+    "T1059.001",
+    "T1012",
+    "T1082",
+    "T1120",
+    "T1614.001"
+  ],
+  "notes": [
+    "The report also shows process enumeration, token adjustment, and write-process-memory activity.",
+    "VirtualBox artifacts suggest anti-analysis awareness.",
+    "The sample used GitHub-hosted infrastructure to stage legendary.exe."
+  ]
+}
