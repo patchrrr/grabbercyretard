@@ -37,27 +37,36 @@ if not defined GIT_EMAIL (
   git config user.email "!GIT_EMAIL!"
 )
 
-git remote get-url origin >nul 2>nul
-if errorlevel 1 (
-  set /p REPO_URL=Enter the GitHub repository URL for origin: 
-  if not defined REPO_URL (
-    echo No remote entered. Stopping.
-    exit /b 1
+set "CURRENT_REMOTE="
+for /f "delims=" %%i in ('git remote get-url origin 2^>nul') do set "CURRENT_REMOTE=%%i"
+
+if defined CURRENT_REMOTE (
+  echo Current origin: !CURRENT_REMOTE!
+)
+
+set /p REPO_URL=Enter the GitHub repository URL for origin (press Enter to keep current): 
+
+if defined REPO_URL (
+  if defined CURRENT_REMOTE (
+    git remote set-url origin "!REPO_URL!"
+  ) else (
+    git remote add origin "!REPO_URL!"
   )
-  git remote add origin "!REPO_URL!"
+) else if not defined CURRENT_REMOTE (
+  echo No remote entered. Stopping.
+  exit /b 1
 )
 
 git add -A
 git diff --cached --quiet
-if not errorlevel 1 (
-  echo No staged changes to commit.
-  exit /b 0
-)
-
-git commit -m "!COMMIT_MESSAGE!"
 if errorlevel 1 (
-  echo Commit failed. Check your Git author settings and staged files.
-  exit /b 1
+  git commit -m "!COMMIT_MESSAGE!"
+  if errorlevel 1 (
+    echo Commit failed. Check your Git author settings and staged files.
+    exit /b 1
+  )
+) else (
+  echo No staged changes to commit. Continuing to push current HEAD.
 )
 
 git branch -M main
